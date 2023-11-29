@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <canvas id="canvas" width="1000" height="400" ></canvas>
+    </div>
+    <select name="" id="select" class="mt-1">
+        <option value="bar" selected>柱形</option>
+        <option value="particle" >粒子</option>
+        <option value="circle" >圆形环绕</option>
+        <option value="line">波浪线</option>
+        <option value="custom">自定义</option>
+    </select>
+    <div class="mt-1">
+        <audio id="audio" controls src="./victory.m4a"></audio>
+    </div>
+</body>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        text-align: center;
+        background-color: #252525;
+    }
+    #select {
+        width: 300px;
+        border-radius: 50px;
+        font-size: 18px;
+        padding: 15px;
+    }
+    .mt-1{
+        margin-top: 1rem;
+    }
+</style>
+
+<script type="module">
+    import {initAudioVisualizer} from '../index.js';
+    let audioel = document.getElementById("audio");
+    let canvasel = document.getElementById("canvas");
+    let select = document.getElementById('select');
+    canvasel.style.background = '#222';
+    //获取select的默认值
+    let type = select.options[select.selectedIndex].value;
+
+    const audioVisualizer =  new initAudioVisualizer({
+        audioElement:audioel, // audio
+        canvasElement:canvasel, // canvas
+        type, // 类型
+        // lineWidth:8,
+        fftSize: 2**8,
+        particleSize:3, // 粒子大小
+        // innerRadius:100, // 内半径
+        maxValue:256, // 最大值
+        customHandle, //自定义渲染
+        // gradient: function(){ //渐变
+        //     return '#000'
+        // }
+    });
+
+   
+    select.addEventListener('change',selectChange);
+    function selectChange(e) {
+        let type = e.target.value;
+        audioVisualizer.setOptions({type})
+    }
+
+    function customHandle({dataArray,canvasWidth, canvasHeight,ctx}) {
+        const originalDataArray = dataArray;
+        let arrLen = originalDataArray.length;
+        const data = new Array(arrLen);
+        for (let i = 0; i < arrLen / 2; i++) {
+            data[i] = data[arrLen - i - 1] = originalDataArray[arrLen / 2 - i]
+        }
+
+        //创建一个线性渐变
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight);
+        //渐变颜色
+        gradient.addColorStop(0, '#00DBDE');
+        gradient.addColorStop(0.5, '#FC00FF');
+        gradient.addColorStop(1, '#7441FF');
+        ctx.strokeStyle = gradient;
+
+        const len = data.length;
+        const lineWidth = canvasWidth / len;
+        ctx.lineWidth = lineWidth - 2;
+        ctx.lineCap = 'round';
+
+        for (let i = 0; i < len; i++) {
+            const datai = data[i]; //<256
+            if (!datai) {
+                continue;
+            }
+            const barHeight = datai / 255 * canvasHeight;
+            const x = i * lineWidth;
+            const y = canvasHeight - barHeight;
+            //画线
+            ctx.beginPath();
+            ctx.moveTo(x, canvasHeight);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+
+    }
+
+</script>
+
+</html>

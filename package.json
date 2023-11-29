@@ -1,0 +1,17 @@
+{
+  "name": "audio-visual",
+  "version": "1.0.0",
+  "description": "音频频谱可视化",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "audio",
+    "visualization",
+    "音频",
+    "可视化"
+  ],
+  "author": "Transo",
+  "license": "MIT"
+}
