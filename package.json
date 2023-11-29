@@ -1,6 +1,6 @@
 {
   "name": "@transo/audio-visualiser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "音频频谱可视化",
   "main": "index.js",
   "scripts": {
