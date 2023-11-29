@@ -2,7 +2,10 @@
 
 ## 效果
 
-![image](https://user-images.githubusercontent.com/26328508/147853669-5298204e-791a-401e-9995-888825802567.png)
+![image](https://github.com/Tranyan/audio-visual/blob/dev/src/assets/imgs/bar.jpg)
+![image](https://github.com/Tranyan/audio-visual/blob/dev/src/assets/imgs/line.jpg)
+![image](https://github.com/Tranyan/audio-visual/blob/dev/src/assets/imgs/circle.jpg)
+![image](https://github.com/Tranyan/audio-visual/blob/dev/src/assets/imgs/particle.jpg)
 
 ## 简介
 
