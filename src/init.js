@@ -101,7 +101,7 @@ export class initAudioVisualizer {
             data[i] = data[arrLen - i - 1] = originalDataArray[arrLen / 2 - i]
         }
 
-        ctx.strokeStyle = this.options.gradient({canvasWidth, canvasHeight,ctx}) || this.getLineGradient({canvasHeight,ctx});
+        ctx.strokeStyle = this.options.gradient({canvasWidth, canvasHeight,ctx}) || this.getLineGradient({canvasHeight,ctx,canvasWidth});
 
         const len = data.length;
         const lineWidth = this.options.lineWidth || canvasWidth / len;
@@ -141,7 +141,7 @@ export class initAudioVisualizer {
         let space = canvasWidth / len;
 
         let lineWidth = this.options.lineWidth || canvasWidth / len;
-        ctx.strokeStyle = this.options.gradient({canvasWidth, canvasHeight,ctx}) || this.getLineGradient({canvasHeight,ctx});
+        ctx.strokeStyle = this.options.gradient({canvasWidth, canvasHeight,ctx}) || this.getLineGradient({canvasHeight,ctx,canvasWidth});
 
         ctx.lineWidth = lineWidth;
         ctx.lineJoin = 'round';
@@ -172,7 +172,7 @@ export class initAudioVisualizer {
             data[i] = data[arrLen - i - 1] = originalDataArray[arrLen / 2 - i]
         }
 
-        ctx.fillStyle = this.options.gradient({canvasWidth, canvasHeight,ctx}) || this.getLineGradient({canvasHeight,ctx});
+        ctx.fillStyle = this.options.gradient({canvasWidth, canvasHeight,ctx}) || this.getLineGradient({canvasHeight,ctx,canvasWidth});
 
         const len = data.length;
         const particleSize = this.options.particleSize || canvasWidth / len;
@@ -239,14 +239,17 @@ export class initAudioVisualizer {
             ctx.stroke();
         }
     }
+
     //获取线性渐变
-    getLineGradient({canvasHeight, ctx}){
-         const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight);
+    getLineGradient({canvasHeight, ctx, canvasWidth}){
+         const gradient = ctx.createLinearGradient(0, 0, 0, canvasWidth);
          gradient.addColorStop(0, this.colors[0]);
          gradient.addColorStop(0.5, this.colors[1]);
          gradient.addColorStop(1, this.colors[2]);
          return gradient;
     }
+
+
     //获取径向渐变
     getRadialGradient({canvasHeight, ctx, canvasWidth,radius,maxValue}){    
         const gradient = ctx.createRadialGradient(canvasWidth / 2, canvasHeight / 2, radius,canvasWidth / 2, canvasHeight / 2,radius+maxValue);

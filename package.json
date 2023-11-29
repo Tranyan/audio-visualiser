@@ -1,5 +1,5 @@
 {
-  "name": "audio-visual",
+  "name": "@transo/audio-visualiser",
   "version": "1.0.0",
   "description": "音频频谱可视化",
   "main": "index.js",
@@ -12,6 +12,7 @@
     "音频",
     "可视化"
   ],
+  "homepage": "https://github.com/Tranyan/audio-visual/tree/dev",
   "author": "Transo",
   "license": "MIT"
 }
