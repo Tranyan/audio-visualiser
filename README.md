@@ -2,10 +2,10 @@
 
 ## 效果
 
-![image](https://github.com/Tranyan/audio-visual/blob/dev/doc/assets/imgs/bar.jpg)
-![image](https://github.com/Tranyan/audio-visual/blob/dev/doc/assets/imgs/line.jpg)
-![image](https://github.com/Tranyan/audio-visual/blob/dev/doc/assets/imgs/circle.jpg)
-![image](https://github.com/Tranyan/audio-visual/blob/dev/doc/assets/imgs/particle.jpg)
+![image](https://github.com/Tranyan/audio-visualiser/blob/dev/docs/assets/imgs/bar.jpg)
+![image](https://github.com/Tranyan/audio-visualiser/blob/dev/docs/assets/imgs/line.jpg)
+![image](https://github.com/Tranyan/audio-visualiser/blob/dev/docs/assets/imgs/circle.jpg)
+![image](https://github.com/Tranyan/audio-visualiser/blob/dev/docs/assets/imgs/particle.jpg)
 
 ## 简介
 
@@ -18,7 +18,7 @@
 ## 使用
 
 ```bash
-npm i audio-visualizer
+npm i @transo/audio-visualiser
 ```
 
 ```bash
