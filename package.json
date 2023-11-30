@@ -3,8 +3,9 @@
   "version": "1.0.2",
   "description": "音频频谱可视化",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c"
   },
   "keywords": [
     "audio",
@@ -14,5 +15,10 @@
   ],
   "homepage": "https://github.com/Tranyan/audio-visual/tree/dev",
   "author": "Transo",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5",
+    "@rollup/plugin-babel": "^6.0.4"
+  }
 }

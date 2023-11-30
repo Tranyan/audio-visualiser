@@ -39,9 +39,8 @@
         margin-top: 1rem;
     }
 </style>
-
-<script type="module">
-    import {initAudioVisualizer} from '../index.js';
+<script src="./dist/index.js"></script>
+<script>
     let audioel = document.getElementById("audio");
     let canvasel = document.getElementById("canvas");
     let select = document.getElementById('select');
@@ -49,7 +48,7 @@
     //获取select的默认值
     let type = select.options[select.selectedIndex].value;
 
-    const audioVisualizer =  new initAudioVisualizer({
+    const audioVisualizer =  new transo.initAudioVisualizer({
         audioElement:audioel, // audio
         canvasElement:canvasel, // canvas
         type, // 类型
@@ -64,7 +63,6 @@
         // }
     });
 
-   
     select.addEventListener('change',selectChange);
     function selectChange(e) {
         let type = e.target.value;
