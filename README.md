@@ -15,6 +15,10 @@
 - 音频数据处理
 - 音频数据可视化
 
+## Demo
+
+[Demo 示例](https://tranyan.github.io/audio-visualiser/)
+
 ## 使用
 
 ```bash
