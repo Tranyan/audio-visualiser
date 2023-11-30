@@ -13,7 +13,7 @@
     "音频",
     "可视化"
   ],
-  "homepage": "https://github.com/Tranyan/audio-visual/tree/dev",
+  "homepage": "https://github.com/Tranyan/audio-visualiser/tree/dev",
   "author": "Transo",
   "license": "MIT",
   "devDependencies": {
