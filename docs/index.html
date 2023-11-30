@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div>
-        <canvas id="canvas" width="1000" height="400" ></canvas>
+        <canvas id="canvas" width="1000" height="400"></canvas>
     </div>
     <select name="" id="select" class="mt-1">
         <option value="bar" selected>柱形</option>
-        <option value="particle" >粒子</option>
-        <option value="circle" >圆形环绕</option>
+        <option value="particle">粒子</option>
+        <option value="circle">圆形环绕</option>
         <option value="line">波浪线</option>
         <option value="custom">自定义</option>
     </select>
@@ -21,21 +23,24 @@
     </div>
 </body>
 <style>
-    *{
+    * {
         margin: 0;
         padding: 0;
     }
+
     body {
         text-align: center;
         background-color: #252525;
     }
+
     #select {
         width: 300px;
         border-radius: 50px;
         font-size: 18px;
         padding: 15px;
     }
-    .mt-1{
+
+    .mt-1 {
         margin-top: 1rem;
     }
 </style>
@@ -48,28 +53,28 @@
     //获取select的默认值
     let type = select.options[select.selectedIndex].value;
 
-    const audioVisualizer =  new transo.initAudioVisualizer({
-        audioElement:audioel, // audio
-        canvasElement:canvasel, // canvas
+    const audioVisualizer = new transo.initAudioVisualizer({
+        audioElement: audioel, // audio
+        canvasElement: canvasel, // canvas
         type, // 类型
         // lineWidth:6,
-        fftSize: 2**8,
-        particleSize:3, // 粒子大小
+        fftSize: 2 ** 8,
+        particleSize: 3, // 粒子大小
         // innerRadius:100, // 内半径
-        maxValue:256, // 最大值
+        maxValue: 256, // 最大值
         customHandle, //自定义渲染
         // gradient: function(){ //渐变
         //     return '#000'
         // }
     });
 
-    select.addEventListener('change',selectChange);
+    select.addEventListener('change', selectChange);
     function selectChange(e) {
         let type = e.target.value;
-        audioVisualizer.setOptions({type})
+        audioVisualizer.setOptions({ type })
     }
 
-    function customHandle({dataArray,canvasWidth, canvasHeight,ctx}) {
+    function customHandle({ dataArray, canvasWidth, canvasHeight, ctx }) {
         const originalDataArray = dataArray;
         let arrLen = originalDataArray.length;
         const data = new Array(arrLen);
@@ -83,27 +88,56 @@
         gradient.addColorStop(0, '#00DBDE');
         gradient.addColorStop(0.5, '#FC00FF');
         gradient.addColorStop(1, '#7441FF');
-        ctx.strokeStyle = gradient;
 
         const len = data.length;
         const lineWidth = canvasWidth / len;
-        ctx.lineWidth = lineWidth - 2;
-        ctx.lineCap = 'round';
 
         for (let i = 0; i < len; i++) {
-            const datai = data[i]; //<256
-            if (!datai) {
+            if (!data[i]) {
                 continue;
             }
-            const barHeight = datai / 255 * canvasHeight;
+            const barHeight = data[i];
             const x = i * lineWidth;
             const y = canvasHeight - barHeight;
+            ctx.lineWidth = lineWidth - 2;
+            ctx.strokeStyle = gradient;
+
             //画线
             ctx.beginPath();
             ctx.moveTo(x, canvasHeight);
             ctx.lineTo(x, y);
             ctx.stroke();
+
+            //粒子
+            const particleSize = 3;
+            ctx.beginPath();
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(x, y - 20, lineWidth - 2, lineWidth - 2);
+            ctx.fill();
+
+
         }
+        ctx.beginPath();
+        for (let i = 0; i < len; i++) {
+            if (!data[i]) {
+                continue;
+            }
+            //曲线
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            const x1 = i * lineWidth;
+            const y1 = canvasHeight - data[i] - 40;
+            const x2 = (i + 1) * lineWidth;
+            const y2 = canvasHeight - data[i + 1] - 40;
+            ctx.quadraticCurveTo(x1, y1, (x1 + x2) / 2, (y1 + y2) / 2);
+        }
+        ctx.stroke();
+
+
+
+
 
     }
 
