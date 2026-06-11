@@ -25,13 +25,19 @@
 npm i @transo/audio-visualiser
 ```
 
-```bash
+```html
+    <audio id="audio" src="./assets/music.mp3" controls></audio>
+    <canvas id="canvas"></canvas>
+```
+
+```js
 import { AudioVisualizer } from "AudioVisualizer";
 const audioVisualizer = new AudioVisualizer(options);
 ```
 
 
-```bash
+```js
+//props
 options:{
     audioElement: htmlAudioElement, // 音频元素, document.querySelector('#audio')
     canvasElement: htmlCanvasElement, // canvas元素, document.querySelector('#canvas')
@@ -42,13 +48,22 @@ options:{
     innerRadius:100, // 内半径, type === 'circle'
     maxValue:256, // 最大值, 限定图形高度
     //自定义渲染函数
-    customHandle:({dataArray,ctx,canvasHeight,canvasWidth,})=>{}, 
+    customHandle:({dataArray,ctx,canvasHeight,canvasWidth,}):void=>{}, 
     //渐变函数
-    gradient: ({canvasWidth, canvasHeight,ctx})=>{},
+    gradient: ({canvasWidth, canvasHeight,ctx}):string=>{},
     colorStore:[], //渐变色库，用于随机取色，自定义颜色请使用gradient函数
 }
 
 ```
+
+```js 
+//method
+audioVisualizer.setOptions(options)
+
+```
+
+
+
 
 
 
